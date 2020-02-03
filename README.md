@@ -1,4 +1,4 @@
-# Project Thorikos
+# SpaceX
 
 ![preview]()
 
@@ -23,7 +23,7 @@
   
 ## Live demo
 
-[You can find the demo here](https://kylebot0.github.io/Project_thorikos/src/index.html)
+[You can find the demo here](https://kylebot0.github.io/web-app-from-scratch-1920/docs/index.html)
 
 ## Description 📝
 
@@ -36,11 +36,11 @@
 
 ### Install the app
 ```
-git clone https://github.com/kylebot0/Project_thorikos.git
+git clone https://github.com/kylebot0/web-app-from-scratch-1920.git
 ```
 Get into the right folder
 ```
-cd Project_thoriko/src
+cd web-app-from-scratch-1920/src
 ```
 Then you can start the application
 
@@ -94,7 +94,7 @@ yarn-error.log*
 
 
 ## License
-Find the license [here](https://github.com/kylebot0/Project_thorikos/blob/master/LICENSE)
+Find the license [here](https://github.com/kylebot0/web-app-from-scratch-1920/blob/master/LICENSE)
 
 
 
