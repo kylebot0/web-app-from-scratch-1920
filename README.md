@@ -1,4 +1,4 @@
-# SpaceX
+# SpaceX API
 
 ![preview]()
 
@@ -26,6 +26,27 @@
 [You can find the demo here](https://kylebot0.github.io/web-app-from-scratch-1920/docs/index.html)
 
 ## Description 📝
+
+## SpaceX API
+The data used throughout the application is from the SpaceX API ```https://api.spacexdata.com/v3```.
+It is a free public api with no rate limit, and can be called as many times as you want.
+
+To get the data i use this piece of code, the
+```javascript
+async function getData(){
+let searchTerm = ""
+let apiLink = `https://api.spacexdata.com/v3/${searchTerm}`
+fetch(apiLink, requestOptions)
+  .then(response => response.json())
+  .then(result => console.log(result))
+  .catch(error => console.log("error", error));
+}
+```
+
+## Flow
+### Actor diagram
+
+### Interaction diagram
 
 ## Installation 🔍
 
@@ -88,14 +109,11 @@ yarn-error.log*
 - [ ] Switch grid sizes
 
 
-## Data
-
 ## Credits
 
 
 ## License
 Find the license [here](https://github.com/kylebot0/web-app-from-scratch-1920/blob/master/LICENSE)
-
 
 
 
