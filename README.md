@@ -1,42 +1,103 @@
-# Web App From Scratch @cmda-minor-web 1819
+# Project Thorikos
 
-In this course you will learn to build a web application without frameworks or unnecessary libraries, but with vanilla HTML, CSS & JavaScript as much as possible. The end result is a modular, single page web app (SPA). Data will be retrieved from an external API of your choice, manipulated and finally shown in the UI of the App. You will learn different ways to structure code and develope your own coding style. With the gained knowledge you will be able to build interactive prototypes, based on real data. Also you will gain a better understanding of the how API's, frameworks and libraries work.
+![preview]()
 
-## Learning goals
+## Table of Contents 🗃
 
-* _You can add structure to your code by applying patterns. You can defend the choice for the chosen patterns_
-* _You can retrieve data, manipulate it and dynamically convert it to html elements using templating_
-* _You understand how you can work with an external API using asynchronous code_
-* _You understand how you can manage state in your application and you inform the user of state where necessary_
+- [Live demo](#Live-demo)
+- [Introduction](#Introduction)
+- [Different kinds of data](#Different-kinds-of-data)
+- [Grid](#Grid)
+- [Data](#Data)
+- [Features](#Features)
+  - [Mapbox](#Mapbox-implementation)
+  - [Grid](#Grid)
+  - [Filtering](#Filtering)
+  - [Heatmap](#Heatmap)
+  - [Bar charts](#Bar-chart)
+- [Functionality](#Functionality)
+- [Installation](#Installation)
+  - [Before you clone](#Before-you-clone)
+  - [Install the app](#Install-the-app)
+  - [Usage](#Usage)
+  
+## Live demo
 
-[Rubric](https://docs.google.com/spreadsheets/d/e/2PACX-1vTjZGWGPC_RMvTMry8YW5XOM79GEIdgS7I5JlOe6OeeOUdmv7ok1s9jQhzojNE4AsyzgL-jJCbRj1LN/pubhtml?gid=0&single=true)
+[You can find the demo here](https://kylebot0.github.io/Project_thorikos/src/index.html)
 
-## Program
+## Description 📝
 
-### Week 1 - Hello API 🐒
+## Installation 🔍
 
-Goal: Retrieve data from an API and render it in an overview page.
+### Before you clone
 
-[Excercises](https://github.com/cmda-minor-web/web-app-from-scratch-1920/blob/master/course/week-1.md)
+- [x] Install a Code Editor
+- [x] Start up your CLI
 
-[Slides](https://drive.google.com/open?id=1Rjl9xqXoKniQSRJPdkU1O5YwWC33SJK8KiV0a-H_xZU)
+### Install the app
+```
+git clone https://github.com/kylebot0/Project_thorikos.git
+```
+Get into the right folder
+```
+cd Project_thoriko/src
+```
+Then you can start the application
 
-### Week 2 - Design and Refactor 🛠
+### Gitignore
+My .gitignore contains all of the files and maps you dont want in your application, use this if you're going to commit and push to your own repo.
+```
+# dependencies
+/node_modules
+/config
+/scripts
 
-Goal: Design the web app. Add routes and states. Rendering detail page.
+# testing
+/coverage
 
-[Excercises](https://github.com/cmda-minor-web/web-app-from-scratch-1920/blob/master/course/week-2.md)
+# production
+/build
 
-[Slides](https://drive.google.com/open?id=1IqQeu1m0dQiSC_KCvrn8eencAgtYe7X6qT-gm0n9Bmc)
+# misc
+.DS_Store
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+```
 
-### Week 3 - Wrapping up 🎁
+## Features 🛠️
 
-Goal:
-Manipulate data. Split code into modules. Reflect on end result
 
-[Excercises](https://github.com/cmda-minor-web/web-app-from-scratch-1920/blob/master/course/week-3.md)
+### Too long to read
+- [x] Mapbox implementation
+- [x] Grid
+- [x] Heatmap
+- [x] Filtering
+- [x] Connected bar chart
+- [x] Legend
 
-[Slides](https://drive.google.com/open?id=1BSzGYNLMgtHD4HRnK7f0DgyTv4Pg3xsQwD_eYNo7v0Y)
+
+### Known Bugs
+
+- Performance issues when clicking a lot of filters and then moving the map
+
+### Upcoming features
+
+- [ ] Switch modes
+- [ ] Switch grid sizes
+
+
+## Data
+
+## Credits
+
+
+## License
+Find the license [here](https://github.com/kylebot0/Project_thorikos/blob/master/LICENSE)
+
+
+
 
 <!-- Add a link to your live demo in Github Pages 🌐-->
 
