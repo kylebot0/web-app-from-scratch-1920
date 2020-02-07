@@ -36,8 +36,6 @@ async function data(buttonId) {
   render(data, buttonId);
 }
  
-
-
 async function getData(searchTerm) {
   let data = await fetch(`${api.url}${searchTerm}`, requestOptions)
     .then(res => {
@@ -62,7 +60,7 @@ async function render(data, buttonId) {
 
 function matchId(item, buttonId) {
   if(buttonId == "launches"){
-  document.querySelector(".title").textContent = "launches"
+   select("h2").textContent = "launches"
    let markup = `
         <article>
         <h2>${item.mission_name}</h2>
@@ -80,7 +78,7 @@ function matchId(item, buttonId) {
         `;
         return markup;
   } else if (buttonId == "ships") {
-    document.querySelector(".title").textContent = "Ships";
+    select("h2").textContent = "Ships";
    let markup = `
         <article>
         <h2>${item.ship_name}</h2>
@@ -98,7 +96,7 @@ function matchId(item, buttonId) {
         `;
     return markup;
   } else if (buttonId == "capsules") {
-    document.querySelector(".title").textContent = "Capsules";
+    select("h2").textContent = "Capsules";
     let markup = `
         <article>
         <h2>${item.capsule_serial}</h2>
@@ -112,7 +110,7 @@ function matchId(item, buttonId) {
         `;
     return markup;
   } else if (buttonId == "missions") {
-    document.querySelector(".title").textContent = "Missions";
+    select("h2").textContent = "Missions";
     let markup = `
         <article>
         <h2>${item.mission_name}</h2>
@@ -126,7 +124,7 @@ function matchId(item, buttonId) {
         `;
     return markup;
   } else if (buttonId == "rockets") {
-    document.querySelector(".title").textContent = "Rockets";
+    select("h2").textContent = "Rockets";
     let markup = `
         <article>
         <h2>${item.rocket_name}</h2>

@@ -93,7 +93,7 @@ form button {
 
 form button:hover {
     border-color: white;
-    box-shadow: inset 75px 0px 0px 0px rgba(255, 255, 255, 0.25 );
+    box-shadow: inset 200px 0px 0px 0px rgba(255, 255, 255, 0.25 );
 
 }
 
@@ -105,7 +105,7 @@ header a {
     text-decoration: none;
 }
 
-.title {
+section > h2 {
     display: flex;
     justify-content: center;
     font-size: 3em;
