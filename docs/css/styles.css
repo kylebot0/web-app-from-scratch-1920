@@ -93,7 +93,7 @@ form button {
 
 form button:hover {
     border-color: white;
-    box-shadow: inset 75px 0px 0px 0px rgba(255, 255, 255, 0.25);
+    box-shadow: inset 75px 0px 0px 0px rgba(255, 255, 255, 0.25 );
 
 }
 

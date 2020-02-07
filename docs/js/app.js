@@ -1,5 +1,6 @@
 import toggleLoading from "./modules/loading"
 import {select, selectAll} from "./modules/selectors"
+import template from "./modules/template"
 
 const requestOptions = {
   method: "GET",
@@ -12,6 +13,10 @@ const api = {
 onClick()
  
 function onClick() {
+  // let templatel = "template:" + "&&test&&" + " Test";
+  // console.log(template(templatel, {
+  //   test: "homemade",
+  // }))
   let button = selectAll("button");
   button.forEach((item, i) => {
     item.addEventListener("click", (e) => {
@@ -30,7 +35,7 @@ async function data(buttonId) {
   let data = await getData(buttonId);
   render(data, buttonId);
 }
-
+ 
 
 
 async function getData(searchTerm) {
