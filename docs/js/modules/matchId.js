@@ -1,4 +1,4 @@
-import { select, selectAll } from "./selectors";
+import { select, selectAll } from "./helpers/selectors";
 
 function matchId(item, buttonId) {
     if (buttonId == "launches") {
@@ -16,6 +16,7 @@ function matchId(item, buttonId) {
         <p>Flight number: ${item.mission_name}</p>
         <p>Launch year: ${item.launch_year}</p>
         <p>Rocket: ${item.rocket.rocket_name}</p> 
+        <a id="${item.flight_number}" href="#${item.flight_number}">More info</a>
         </article
         `;
         return markup;
@@ -84,4 +85,26 @@ function matchId(item, buttonId) {
     }
 }
 
-export {matchId}
+function matchDetailId(item, buttonId) {
+    if (buttonId == "launches") {
+        select("h2").textContent = item.mission_name;
+        let markup = `
+        <article>
+        <h2>${item.mission_name}</h2>
+        ${(() => {
+                if (item.links.mission_patch_small == null) {
+                    return "<div class='no-image'><p>No image available</p>";
+                } else {
+                    return `<div><img src=${item.links.mission_patch_small}>`;
+                }
+            })()}</div>
+        <p>Flight number: ${item.mission_name}</p>
+        <p>Launch year: ${item.launch_year}</p>
+        <p>Rocket: ${item.rocket.rocket_name}</p> 
+        </article
+        `;
+        return markup;
+          }
+}
+
+export {matchId, matchDetailId}

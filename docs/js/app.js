@@ -1,9 +1,10 @@
-import toggleLoading from "./modules/loading";
-import { select, selectAll } from "./modules/selectors";
-import template from "./modules/template";
-import { addEvent } from "./modules/eventlisteners";
+import toggleLoading from "./modules/helpers/loading";
+import { getData, getDetailData } from "./modules/data";
+import { errorHandling } from "./modules/error";
+import { select, selectAll } from "./modules/helpers/selectors";
+import { addEvent } from "./modules/helpers/eventlisteners";
 import { Router } from "./modules/router";
-import { matchId } from "./modules/matchId";
+import { matchId, matchDetailId } from "./modules/matchId";
 
 const requestOptions = {
   method: "GET",
@@ -15,61 +16,67 @@ const api = {
 const router = new Router();
 
 onLoad();
+
 function onLoad() {
-  let buttons = selectAll("main > section a");
-  addRoutes(buttons);
-  buttons.forEach((item, i) => {
-    addEvent(item, "click", e => {
-      // Bug met appenden
-      setTimeout(()=>{
-        initRouting()
-      }, 1)
+  toggleLoading()
+  // buttons.forEach((item, i) => {
+  //   addEvent(item, "click", e => {
+  //     // Bug met appenden
+  //     setTimeout(() => {
+  //       // initRouting();
+  //       router.init()
+  //     }, 1);
+  //   });
+  // });
+  app();
+}
+
+
+function addButtonRoutes(buttons) {
+  // Add routes
+ buttons.forEach((item,i)=>{
+    router.get(`${buttons[i].id}`, function(e) {
+      let articles = selectAll("article");
+      articles.forEach(article => {
+        article.remove();
+      });
+      toggleLoading();
+      app(buttons[i].id);
     });
   });
-}
-
-function addRoutes(buttons) {
-  // Add routes
-  for(let i = 0; i < buttons.length;i++){
-    router.get(`${buttons[i].id}`, function (e) {
-      let articles = selectAll("article")
-      articles.forEach((article) => {
-        article.remove()
-      })
-      toggleLoading()
-      data(buttons[i].id)
-    });
-  }
-  
-
   // execute routes
-  initRouting()
 }
 
-function initRouting() {
-  router.init();
+async function app() {
+  let buttons = selectAll(".buttons a");
+  let data = await getData(buttons, api, requestOptions);
+  addRoutesToRouter(data, buttons)
+  linkEventButtons(data)
+  toggleLoading()
 }
 
-async function data(buttonId) {
-  let data = await getData(buttonId);
-  render(data, buttonId);
-}
-
-async function getData(searchTerm) {
-  let data = await fetch(`${api.url}${searchTerm}`, requestOptions)
-    .then(res => {
-      return errorHandling(res);
+function addRoutesToRouter(data, buttons){
+  data.forEach((category,i)=>{
+    category.forEach((item,i)=>{
+      router.get(`${item[Object.keys(item)[0]]}`, async () => {
+        let data = await getDetailData(id, api, item[Object.keys(item)[0]]);
+        renderDetail(data, item.id);
+      });
     })
-    .then(result => {
-      return result;
-    })
-    .catch(error => console.log("error", error));
-  return data;
+  })
+  buttons.forEach((item, i)=> {
+    router.get(`${item.id}`, function (e) {
+      render(data, item.id);
+    });
+  })
+  console.log(router.routes)
+  router.init()
 }
 
-async function render(data, buttonId) {
+function render(data, buttonId) {
+  console.log(data)
   toggleLoading();
-  await data.forEach((item, i) => {
+  data.forEach((item, i) => {
     let container = select(".container-info");
     let markup = matchId(item, buttonId);
     container.insertAdjacentHTML("beforeend", markup);
@@ -77,11 +84,26 @@ async function render(data, buttonId) {
 }
 
 
+function linkEventButtons() {
+  let buttons = selectAll(".container-info a")
+  buttons.forEach((item, i)=>{
+    addEvent(item, "click", e => {
+      let articles = selectAll("article");
+      articles.forEach(article => {
+        article.remove();
+      });
+      setTimeout(() => {
+        router.init();
+      }, 1);
+      
+    })
+  })
+}
 
-function errorHandling(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    console.log("not ok");
-  }
+
+function renderDetail(data, buttonId) {
+  console.log(data)
+  let container = select(".container-info");
+  let markup = matchDetailId(data, buttonId);
+  container.insertAdjacentHTML("beforeend", markup);
 }

@@ -1,4 +1,4 @@
-class Router {
+export class Router {
   constructor() {
     this.routes = [];
     this.options = [];
@@ -6,22 +6,26 @@ class Router {
 
   get(uri, cb) {
     if (!uri || !cb) {
-        throw new Error("uri or callback must be given")
+        throw new Error("Must give uri or cb")
     } else if (typeof uri !== "string"){
-      throw new TypeError("typeof uri must be a string")
+      throw new TypeError("Must be a string")
     } else if (typeof cb !== "function"){
-      throw new TypeError("typeof callback must be a function")
-    };
-    this.routes.forEach(route => {
-      if (route.uri === uri)
-        throw new Error(`the uri ${route.uri} already exists`);
+      throw new TypeError("Cb must be a function")
+    }else {
+    this.routes.forEach((route, i) => {
+      if (route.uri === uri) {
+        this.routes.splice(i, 1)
+        // throw new Error(`the uri ${route.uri} already exists`);
+      } else {
+        
+      }
     });
     const route = {
       uri,
       cb
     };
-    console.log(route);
     this.routes.push(route);
+  }
   }
 
   init() {
@@ -29,9 +33,7 @@ class Router {
       let path = window.location.href;
       let cleanPath = path.split("#")[0];
       let routePath = cleanPath + "#" + route.uri;
-     console.log(path)
       if (path == routePath) {
-        console.log("test");
         let req = { path };
         return route.cb.call(this, req);
       }
@@ -39,4 +41,3 @@ class Router {
   }
 }
 
-export { Router };
