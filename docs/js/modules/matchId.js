@@ -86,6 +86,7 @@ function matchId(item, buttonId) {
 }
 
 function matchDetailId(item, buttonId) {
+    console.log(item, buttonId)
     if (buttonId == "launches") {
         select("h2").textContent = item.mission_name;
         let markup = `

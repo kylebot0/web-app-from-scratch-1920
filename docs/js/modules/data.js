@@ -24,8 +24,9 @@ async function getData(searchTerm, api, requestOptions) {
     return dataArray;
 }
 
-async function getDetailData(searchTerm, api, id) {
-  let data = await fetch(`${api.url}${searchTerm}/${id}`)
+async function getDetailData(searchTerm, api, id, categoryId) {
+  let dataArray = [];
+  let data = await fetch(`${api.url}${categoryId}/${id}`)
     .then(res => {
       return errorHandling(res);
     })
@@ -33,7 +34,13 @@ async function getDetailData(searchTerm, api, id) {
       return result;
     })
     .catch(error => console.log("error", error));
-  return data;
+    if(data == undefined){
+      return
+    } else {
+      dataArray.push(data);
+    }
+  
+  return dataArray[0];
 }
 
 export {getData, getDetailData}

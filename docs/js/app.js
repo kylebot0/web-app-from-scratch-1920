@@ -19,64 +19,73 @@ onLoad();
 
 function onLoad() {
   toggleLoading()
-  // buttons.forEach((item, i) => {
-  //   addEvent(item, "click", e => {
-  //     // Bug met appenden
-  //     setTimeout(() => {
-  //       // initRouting();
-  //       router.init()
-  //     }, 1);
-  //   });
-  // });
+  const hashDetection = new hashHandler();
   app();
 }
 
+function hashHandler() {
+  this.oldHash = window.location.hash;
+  this.Check;
 
-function addButtonRoutes(buttons) {
-  // Add routes
- buttons.forEach((item,i)=>{
-    router.get(`${buttons[i].id}`, function(e) {
+  let that = this;
+  let detect = function () {
+    if (that.oldHash != window.location.hash) {
       let articles = selectAll("article");
-      articles.forEach(article => {
-        article.remove();
-      });
-      toggleLoading();
-      app(buttons[i].id);
-    });
-  });
-  // execute routes
+            articles.forEach(article => {
+              article.remove();
+            });
+      router.init();
+      that.oldHash = window.location.hash;
+    }
+  };
+  this.Check = setInterval(function () { detect() }, 100);
 }
 
 async function app() {
   let buttons = selectAll(".buttons a");
   let data = await getData(buttons, api, requestOptions);
   addRoutesToRouter(data, buttons)
-  linkEventButtons(data)
   toggleLoading()
 }
 
 function addRoutesToRouter(data, buttons){
-  data.forEach((category,i)=>{
-    category.forEach((item,i)=>{
-      router.get(`${item[Object.keys(item)[0]]}`, async () => {
-        let data = await getDetailData(id, api, item[Object.keys(item)[0]]);
-        renderDetail(data, item.id);
+  data.forEach((category, i)=>{
+    console.log(category)
+    category.forEach((item)=>{
+      let itemKey = item[Object.keys(item)[0]];
+      let categoryId = matchCategoryToId(category, i)
+      router.get(`${itemKey}`, categoryId, async () => {
+        toggleLoading()
+        let data = await getDetailData(categoryId, api, itemKey, categoryId);
+        renderDetail(data, categoryId);
+        toggleLoading()
       });
     })
   })
   buttons.forEach((item, i)=> {
-    router.get(`${item.id}`, function (e) {
-      render(data, item.id);
+    router.get(`${item.id}`, `${item.id}`,function (e) {
+      render(data, item.id, i);
     });
   })
-  console.log(router.routes)
+  console.log(router)
   router.init()
 }
-
-function render(data, buttonId) {
+function matchCategoryToId(category, i){
+  if(i == 0){
+    return "launches"
+  } else if(i == 1){
+    return "ships"
+  } else if (i == 2) {
+    return "capsules"
+  } else if (i == 3) {
+    return "missions"
+  } else if (i == 4) {
+    return "rockets";
+  }
+}
+function render(data, buttonId, index) {
   console.log(data)
-  toggleLoading();
-  data.forEach((item, i) => {
+  data[index].forEach((item, i) => {
     let container = select(".container-info");
     let markup = matchId(item, buttonId);
     container.insertAdjacentHTML("beforeend", markup);
@@ -84,25 +93,8 @@ function render(data, buttonId) {
 }
 
 
-function linkEventButtons() {
-  let buttons = selectAll(".container-info a")
-  buttons.forEach((item, i)=>{
-    addEvent(item, "click", e => {
-      let articles = selectAll("article");
-      articles.forEach(article => {
-        article.remove();
-      });
-      setTimeout(() => {
-        router.init();
-      }, 1);
-      
-    })
-  })
-}
-
-
 function renderDetail(data, buttonId) {
-  console.log(data)
+  console.log(buttonId)
   let container = select(".container-info");
   let markup = matchDetailId(data, buttonId);
   container.insertAdjacentHTML("beforeend", markup);

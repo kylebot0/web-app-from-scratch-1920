@@ -4,7 +4,7 @@ export class Router {
     this.options = [];
   }
 
-  get(uri, cb) {
+  get(uri, category, cb) {
     if (!uri || !cb) {
         throw new Error("Must give uri or cb")
     } else if (typeof uri !== "string"){
@@ -22,6 +22,7 @@ export class Router {
     });
     const route = {
       uri,
+      category,
       cb
     };
     this.routes.push(route);
