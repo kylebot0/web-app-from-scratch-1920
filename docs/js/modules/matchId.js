@@ -1,6 +1,6 @@
 import { select, selectAll } from "./helpers/selectors";
 
-function matchId(item, buttonId) {
+function template(item, buttonId) {
     if (buttonId == "launches") {
         select("h2").textContent = "launches";
         let markup = `
@@ -15,7 +15,7 @@ function matchId(item, buttonId) {
             })()}</div>
         <p>Flight number: ${item.mission_name}</p>
         <p>Launch year: ${item.launch_year}</p>
-        <p>Rocket: ${item.rocket.rocket_name}</p> 
+        <p>Rocket: ${item.rocket.rocket_name}</p>
         <a id="${item.flight_number}" href="#${item.flight_number}">More info</a>
         </article
         `;
@@ -34,7 +34,7 @@ function matchId(item, buttonId) {
             })()}</div>
         <p>Number of missions: ${item.missions.length}</p>
         <p>Active: ${item.active}</p>
-        <p>Roles: ${item.roles[0]}</p> 
+        <p>Roles: ${item.roles[0]}</p>
         </article
         `;
         return markup;
@@ -48,10 +48,10 @@ function matchId(item, buttonId) {
         </div>
         <p>Status: ${item.status}</p>
         <p>Mission: ${item.missions.name}</p>
-        <p>Details: ${item.details}</p> 
+        <p>Details: ${item.details}</p>
         </article
         `
-        ;
+            ;
         return markup;
     } else if (buttonId == "missions") {
         select("h2").textContent = "Missions";
@@ -63,7 +63,7 @@ function matchId(item, buttonId) {
         </div>
         <p>Website: ${item.website}</p>
         <p>Twitter: ${item.twitter}</p>
-        <p>Description: ${item.description}</p> 
+        <p>Description: ${item.description}</p>
         </article
         `;
         return markup;
@@ -78,34 +78,35 @@ function matchId(item, buttonId) {
         <p>Active: ${item.active}</p>
         <p>Boosters: ${item.boosters}</p>
         <p>Engines: ${item.engines.number}</p>
-        <p>First flight: ${item.first_flight}</p> 
+        <p>First flight: ${item.first_flight}</p>
         </article
         `;
         return markup;
     }
 }
 
-function matchDetailId(item, buttonId) {
-    console.log(item, buttonId)
-    if (buttonId == "launches") {
-        select("h2").textContent = item.mission_name;
-        let markup = `
+function templateDetail(item, buttonId) {
+  console.log(item, buttonId);
+  if (buttonId == "launches") {
+    select("h2").textContent = item.mission_name;
+    let markup = `
         <article>
         <h2>${item.mission_name}</h2>
         ${(() => {
-                if (item.links.mission_patch_small == null) {
-                    return "<div class='no-image'><p>No image available</p>";
-                } else {
-                    return `<div><img src=${item.links.mission_patch_small}>`;
-                }
-            })()}</div>
+          if (item.links.mission_patch_small == null) {
+            return "<div class='no-image'><p>No image available</p>";
+          } else {
+            return `<div><img src=${item.links.mission_patch_small}>`;
+          }
+        })()}</div>
         <p>Flight number: ${item.mission_name}</p>
         <p>Launch year: ${item.launch_year}</p>
         <p>Rocket: ${item.rocket.rocket_name}</p> 
         </article
         `;
-        return markup;
-          }
+    return markup;
+  }
 }
 
-export {matchId, matchDetailId}
+
+export { template, templateDetail };

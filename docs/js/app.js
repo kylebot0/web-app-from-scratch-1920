@@ -1,10 +1,10 @@
 import toggleLoading from "./modules/helpers/loading";
 import { getData, getDetailData } from "./modules/data";
-import { errorHandling } from "./modules/error";
 import { select, selectAll } from "./modules/helpers/selectors";
-import { addEvent } from "./modules/helpers/eventlisteners";
 import { Router } from "./modules/router";
-import { matchId, matchDetailId } from "./modules/matchId";
+import { template, templateDetail } from "./modules/matchId";
+import hashHandler from "./modules/hashHandler";
+import { createStorage } from "./modules/localStorage";
 
 const requestOptions = {
   method: "GET",
@@ -18,84 +18,79 @@ const router = new Router();
 onLoad();
 
 function onLoad() {
-  toggleLoading()
-  const hashDetection = new hashHandler();
+  toggleLoading();
+  const hashDetection = new hashHandler(router);
   app();
 }
 
-function hashHandler() {
-  this.oldHash = window.location.hash;
-  this.Check;
-
-  let that = this;
-  let detect = function () {
-    if (that.oldHash != window.location.hash) {
-      let articles = selectAll("article");
-            articles.forEach(article => {
-              article.remove();
-            });
-      router.init();
-      that.oldHash = window.location.hash;
-    }
-  };
-  this.Check = setInterval(function () { detect() }, 100);
-}
-
 async function app() {
-  let buttons = selectAll(".buttons a");
-  let data = await getData(buttons, api, requestOptions);
-  addRoutesToRouter(data, buttons)
-  toggleLoading()
+  const buttons = selectAll(".buttons a");
+  const data = await checkLocalStorage(buttons);
+  addRoutesToRouter(data, buttons);
+  toggleLoading();
 }
 
-function addRoutesToRouter(data, buttons){
-  data.forEach((category, i)=>{
-    console.log(category)
-    category.forEach((item)=>{
+async function checkLocalStorage(buttons) {
+  const storage = createStorage();
+  let items = storage.getItem();
+  if (items == 0) {
+    console.log("1");
+    let data = await getData(buttons, api, requestOptions);
+    storage.setItem(data);
+    return data;
+  } else if (items.length > 1) {
+    return storage.getItem();
+  }
+}
+
+function addRoutesToRouter(data, buttons) {
+  data.forEach((category, i) => {
+    console.log(category);
+    category.forEach(item => {
       let itemKey = item[Object.keys(item)[0]];
-      let categoryId = matchCategoryToId(category, i)
+      let categoryId = matchCategoryToId(category, i);
       router.get(`${itemKey}`, categoryId, async () => {
-        toggleLoading()
+        toggleLoading();
         let data = await getDetailData(categoryId, api, itemKey, categoryId);
         renderDetail(data, categoryId);
-        toggleLoading()
+        toggleLoading();
       });
-    })
-  })
-  buttons.forEach((item, i)=> {
-    router.get(`${item.id}`, `${item.id}`,function (e) {
+    });
+  });
+  buttons.forEach((item, i) => {
+    router.get(`${item.id}`, `${item.id}`, function(e) {
       render(data, item.id, i);
     });
-  })
-  console.log(router)
-  router.init()
+  });
+  console.log(router);
+  router.init();
 }
-function matchCategoryToId(category, i){
-  if(i == 0){
-    return "launches"
-  } else if(i == 1){
-    return "ships"
+
+function matchCategoryToId(category, i) {
+  if (i == 0) {
+    return "launches";
+  } else if (i == 1) {
+    return "ships";
   } else if (i == 2) {
-    return "capsules"
+    return "capsules";
   } else if (i == 3) {
-    return "missions"
+    return "missions";
   } else if (i == 4) {
     return "rockets";
   }
 }
 function render(data, buttonId, index) {
-  console.log(data)
-  data[index].forEach((item, i) => {
+  console.log(data);
+  data[index].forEach((item, i) => { 
     let container = select(".container-info");
-    let markup = matchId(item, buttonId);
+    let markup = template(item, buttonId);
     container.insertAdjacentHTML("beforeend", markup);
   });
 }
 
-
 function renderDetail(data, buttonId) {
-  console.log(buttonId)
+  console.log(buttonId);
   let container = select(".container-info");
-  let markup = matchDetailId(data, buttonId);
+  let markup = templateDetail(data, buttonId);
   container.insertAdjacentHTML("beforeend", markup);
 }

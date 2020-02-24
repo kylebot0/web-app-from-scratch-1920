@@ -14,6 +14,7 @@ export class Router {
     }else {
     this.routes.forEach((route, i) => {
       if (route.uri === uri) {
+        // Temporary
         this.routes.splice(i, 1)
         // throw new Error(`the uri ${route.uri} already exists`);
       } else {
