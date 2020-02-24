@@ -67,20 +67,28 @@ function addRoutesToRouter(data, buttons) {
 }
 
 function matchCategoryToId(category, i) {
-  if (i == 0) {
-    return "launches";
-  } else if (i == 1) {
-    return "ships";
-  } else if (i == 2) {
-    return "capsules";
-  } else if (i == 3) {
-    return "missions";
-  } else if (i == 4) {
-    return "rockets";
+  let title = '';
+  switch (i) {
+    case 0: 
+    title = "launches"
+      break;
+    case 1:
+      title = "ships"
+      break;
+    case 2:
+      title = "capsules"
+      break;
+    case 3:
+      title = "missions"
+      break;
+    case 4:
+      title = "rockets"
+      break;
   }
+  return title
 }
 function render(data, buttonId, index) {
-  console.log(data);
+  console.log(data[index]);
   data[index].forEach((item, i) => { 
     let container = select(".container-info");
     let markup = template(item, buttonId);
