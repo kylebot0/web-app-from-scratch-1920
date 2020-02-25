@@ -8,13 +8,8 @@ function template(item, buttonId) {
           markup = `
         <article>
         <h2>${item.mission_name}</h2>
-        ${(() => {
-                  if (item.links.mission_patch_small == null) {
-                      return "<div class='no-image'><p>No image available</p>";
-                  } else {
-                      return `<div><img src=${item.links.mission_patch_small}>`;
-                  }
-              })()}</div>
+        ${checkForImageLaunches(item)}
+        </div>
         <p>Flight number: ${item.mission_name}</p>
         <p>Launch year: ${item.launch_year}</p>
         <p>Rocket: ${item.rocket.rocket_name}</p>
@@ -29,16 +24,14 @@ function template(item, buttonId) {
           markup = `
         <article>
         <h2>${item.ship_name}</h2>
-         ${(() => {
-                  if (item.image == null) {
-                      return "<div class='no-image'><p>No image available</p>";
-                  } else {
-                      return `<div><img src=${item.image}>`;
-                  }
-              })()}</div>
+         ${checkForImageShips(item)}
+         </div>
         <p>Number of missions: ${item.missions.length}</p>
         <p>Active: ${item.active}</p>
         <p>Roles: ${item.roles[0]}</p>
+         <a id="${item.ship_id}" href="#${
+              item.ship_id
+          }">More info</a>
         </article>
         `;
       break
@@ -53,6 +46,7 @@ function template(item, buttonId) {
         <p>Status: ${item.status}</p>
         <p>Mission: ${item.missions.name}</p>
         <p>Details: ${item.details}</p>
+         <a id="${item.capsule_serial}" href="#${item.capsule_serial}">More info</a>
         </article>
         `;
       break
@@ -67,6 +61,7 @@ function template(item, buttonId) {
         <p>Website: ${item.website}</p>
         <p>Twitter: ${item.twitter}</p>
         <p>Description: ${item.description}</p>
+         <a id="${item.mission_id}" href="#${item.mission_id}">More info</a>
         </article>
         `;
       break
@@ -82,6 +77,9 @@ function template(item, buttonId) {
         <p>Boosters: ${item.boosters}</p>
         <p>Engines: ${item.engines.number}</p>
         <p>First flight: ${item.first_flight}</p>
+         <a id="${item.rocket_id}" href="#${
+            item.rocket_id
+          }">More info</a>
         </article>
         `;
       break
@@ -91,20 +89,14 @@ function template(item, buttonId) {
 }
 
 function templateDetail(item, buttonId) {
-    console.log(item)
     let markup = ``
     switch (buttonId) {
         case "launches":
             select("h2").textContent = "";
             markup = `
         <article class="single-item">
-        ${(() => {
-          if (item.links.mission_patch == null) {
-            return "<div class='no-image'><p>No image available</p>";
-          } else {
-            return `<div><img src=${item.links.mission_patch}>`;
-          }
-        })()}</div>
+        ${checkForImageLaunches(item)}
+        </div>
         <div>
         <h2>${item.mission_name}</h2>
         <p>Flight number: ${item.flight_number}</p>
@@ -128,13 +120,7 @@ function templateDetail(item, buttonId) {
             markup = `
         <article>
         <h2>${item.ship_name}</h2>
-         ${(() => {
-                    if (item.image == null) {
-                        return "<div class='no-image'><p>No image available</p>";
-                    } else {
-                        return `<div><img src=${item.image}>`;
-                    }
-                })()}</div>
+         ${checkForImageShips(item)}</div>
         <p>Number of missions: ${item.missions.length}</p>
         <p>Active: ${item.active}</p>
         <p>Roles: ${item.roles[0]}</p>
@@ -191,4 +177,21 @@ return `
 ${imgArr.map(img => `<img class="flickr-img" src="${img}">`)}
 `
 }
+
+function checkForImageLaunches(item){
+    if (item.links.mission_patch_small == null) {
+        return "<div class='no-image'><p>No image available</p>";
+    } else {
+        return `<div><img src=${item.links.mission_patch_small}>`;
+    }
+}
+
+function checkForImageShips(item) {
+    if (item.image == null) {
+        return "<div class='no-image'><p>No image available</p>";
+    } else {
+        return `<div><img src=${item.image} onerror="imgError(this);">`;
+    }
+}
+
 export { template, templateDetail };

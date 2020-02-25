@@ -1,3 +1,5 @@
+import { select } from "./helpers/selectors";
+
 export class Router {
   constructor() {
     this.routes = [];
@@ -31,6 +33,23 @@ export class Router {
   }
 
   init() {
+    console.log(window.location.hash)
+    let indexPage = 167;
+    let doesExist = this.routes.filter((route, i)=>{
+      let hashRoute = "#" + route.uri
+      if(hashRoute == window.location.hash){
+        return true
+      } else if(window.location.hash.length == 0){
+        return true
+      }
+       else {
+        return false
+      }
+    })
+    if(doesExist.length == 0){
+      select("h2").textContent = "Page not found"
+    }
+    
     this.routes.some(route => {
       let path = window.location.href;
       let cleanPath = path.split("#")[0];

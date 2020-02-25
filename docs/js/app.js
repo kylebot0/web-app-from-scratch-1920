@@ -5,6 +5,8 @@ import { Router } from "./modules/router";
 import { template, templateDetail } from "./modules/matchId";
 import hashHandler from "./modules/hashHandler";
 import { createStorage } from "./modules/localStorage";
+import { errorHandling } from "./modules/error";
+import { addEvent } from "./modules/helpers/eventlisteners";
 
 const requestOptions = {
   method: "GET",
@@ -32,10 +34,10 @@ async function app() {
 
 async function checkLocalStorage(buttons) {
   const storage = createStorage();
-  let items = storage.getItem();
+  const items = storage.getItem();
   if (items == 0) {
     console.log("1");
-    let data = await getData(buttons, api, requestOptions);
+    const data = await getData(buttons, api, requestOptions);
     storage.setItem(data);
     return data;
   } else if (items.length > 1) {
@@ -45,13 +47,12 @@ async function checkLocalStorage(buttons) {
 
 function addRoutesToRouter(data, buttons) {
   data.forEach((category, i) => {
-    console.log(category);
     category.forEach(item => {
-      let itemKey = item[Object.keys(item)[0]];
+      let itemKey = determineItemKey(item, i);
       let categoryId = matchCategoryToId(category, i);
       router.get(`${itemKey}`, categoryId, async () => {
         toggleLoading();
-        let data = await getDetailData(categoryId, api, itemKey, categoryId);
+        const data = await getDetailData(categoryId, api, itemKey, categoryId);
         renderDetail(data, categoryId);
         toggleLoading();
       });
@@ -62,8 +63,29 @@ function addRoutesToRouter(data, buttons) {
       render(data, item.id, i);
     });
   });
-  console.log(router);
   router.init();
+}
+
+function determineItemKey(item, i){
+  let itemKey = '';
+  switch (i) {
+    case 0:
+      itemKey = item[Object.keys(item)[0]];
+      break;
+    case 1:
+      itemKey = item[Object.keys(item)[0]];
+      break;
+    case 2:
+      itemKey = item[Object.keys(item)[0]];
+      break;
+    case 3:
+      itemKey = item[Object.keys(item)[1]];
+      break;
+    case 4:
+      itemKey = item.rocket_id;
+      break;
+  }
+  return itemKey;
 }
 
 function matchCategoryToId(category, i) {
@@ -88,7 +110,6 @@ function matchCategoryToId(category, i) {
   return title
 }
 function render(data, buttonId, index) {
-  console.log(data[index]);
   data[index].forEach((item, i) => { 
     let container = select(".container-info");
     let markup = template(item, buttonId);
@@ -97,7 +118,6 @@ function render(data, buttonId, index) {
 }
 
 function renderDetail(data, buttonId) {
-  console.log(buttonId);
   let container = select(".container-info");
   let markup = templateDetail(data, buttonId);
   container.insertAdjacentHTML("beforeend", markup);

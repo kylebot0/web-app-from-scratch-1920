@@ -13,6 +13,13 @@
     <title>SpaceX</title>
   </head>
   <body>
+    <script>
+      function imgError(image) {
+          image.onerror = "";
+          image.src = "img/noimage.png";
+          return true;
+        }
+    </script>
     <header>
       <a href="index.html">
         <img src="img/logo.png" />
