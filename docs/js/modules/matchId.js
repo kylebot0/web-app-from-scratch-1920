@@ -1,10 +1,12 @@
 import { select, selectAll } from "./helpers/selectors";
 
+const categoryArray = ["launches", "ships", "capsules", "missions", "rockets"]
+
 function template(item, buttonId) {
     let markup = ``
   switch (buttonId) {
-    case "launches":
-          select("h2").textContent = "launches";
+      case categoryArray[0]:
+          select("h2").textContent = categoryArray[0];
           markup = `
         <article>
         <h2>${item.mission_name}</h2>
@@ -19,8 +21,8 @@ function template(item, buttonId) {
         </article>
         `;
       break
-    case "ships":
-          select("h2").textContent = "Ships";
+      case categoryArray[1]:
+          select("h2").textContent = categoryArray[1];
           markup = `
         <article>
         <h2>${item.ship_name}</h2>
@@ -35,8 +37,8 @@ function template(item, buttonId) {
         </article>
         `;
       break
-    case "capsules":
-          select("h2").textContent = "Capsules";
+      case categoryArray[2]:
+          select("h2").textContent = categoryArray[2];
           markup = `
         <article>
         <h2>${item.capsule_serial}</h2>
@@ -50,8 +52,8 @@ function template(item, buttonId) {
         </article>
         `;
       break
-    case "missions":
-          select("h2").textContent = "Missions";
+      case categoryArray[3]:
+          select("h2").textContent = categoryArray[3];
          markup = `
         <article>
         <h2>${item.mission_name}</h2>
@@ -65,8 +67,8 @@ function template(item, buttonId) {
         </article>
         `;
       break
-    case "rockets":
-          select("h2").textContent = "Rockets";
+      case categoryArray[4]:
+          select("h2").textContent = categoryArray[4];
           markup = `
         <article>
         <h2>${item.rocket_name}</h2>
@@ -91,9 +93,9 @@ function template(item, buttonId) {
 function templateDetail(item, buttonId) {
     let markup = ``
     switch (buttonId) {
-        case "launches":
-            select("h2").textContent = "";
-            markup = `
+      case categoryArray[0]:
+        select("h2").textContent = "";
+        markup = `
         <article class="single-item">
         ${checkForImageLaunches(item)}
         </div>
@@ -114,10 +116,10 @@ function templateDetail(item, buttonId) {
         </div>
         </article
         `;
-            break
-        case "ships":
-            select("h2").textContent = "Ships";
-            markup = `
+        break;
+        case categoryArray[1]:
+        select("h2").textContent = "";
+        markup = `
         <article>
         <h2>${item.ship_name}</h2>
          ${checkForImageShips(item)}</div>
@@ -126,10 +128,10 @@ function templateDetail(item, buttonId) {
         <p>Roles: ${item.roles[0]}</p>
         </article
         `;
-            break
-        case "capsules":
-            select("h2").textContent = "Capsules";
-            markup = `
+        break;
+        case categoryArray[2]:
+        select("h2").textContent = "";
+        markup = `
         <article>
         <h2>${item.capsule_serial}</h2>
          <div class='no-image'>
@@ -139,10 +141,10 @@ function templateDetail(item, buttonId) {
         <p>Mission: ${item.missions.name}</p>
         <p>Details: ${item.details}</p>
         </article>`;
-            break
-        case "missions":
-            select("h2").textContent = "Missions";
-            markup = `
+        break;
+        case categoryArray[3]:
+        select("h2").textContent = "";
+        markup = `
         <article>
         <h2>${item.mission_name}</h2>
          <div class='no-image'>
@@ -153,10 +155,10 @@ function templateDetail(item, buttonId) {
         <p>Description: ${item.description}</p>
         </article
         `;
-            break
-        case "rockets":
-            select("h2").textContent = "Rockets";
-            markup = `
+        break;
+        case categoryArray[4]:
+        select("h2").textContent = "";
+        markup = `
         <article>
         <h2>${item.rocket_name}</h2>
         <div>
@@ -168,7 +170,7 @@ function templateDetail(item, buttonId) {
         <p>First flight: ${item.first_flight}</p>
         </article
         `;
-            break
+        break;
     }
     return markup
 }
