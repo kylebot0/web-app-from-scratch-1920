@@ -1,138 +1,73 @@
-# SpaceX API
+# SpaceX Display ⚙️
 
-![preview]()
+This project uses the SpaceX API to display their rockets, missions, launches, capsules and ships. It has certain overview pages and detailpages. The detailpages feature all the extra content 
+
+![Project Image](https://i.imgur.com/ZALRBjH.png)
+> Image description
 
 ## Table of Contents 🗃
+* [Live demo](#live-demo)
+* [To Do](#to-do-)
+* [Description](#description-)
+* [Installing](#installing-)
+  * [Packages and Technologies](#packages-and-technologies)
+* [API](#api-)
+* [Research](#research-)
+* [Concept](#concept-)
+* [UI Design](#ui-design-)
+* [How It Works](#how-it-works-️)
+* [Sources](#sources-)
+  * [Honourable Mentions](#honourable-mentions)
+* [Licence](#licence-)
 
-- [Live demo](#Live-demo)
-- [Introduction](#Introduction)
-- [Different kinds of data](#Different-kinds-of-data)
-- [Grid](#Grid)
-- [Data](#Data)
-- [Features](#Features)
-  - [Mapbox](#Mapbox-implementation)
-  - [Grid](#Grid)
-  - [Filtering](#Filtering)
-  - [Heatmap](#Heatmap)
-  - [Bar charts](#Bar-chart)
-- [Functionality](#Functionality)
-- [Installation](#Installation)
-  - [Before you clone](#Before-you-clone)
-  - [Install the app](#Install-the-app)
-  - [Usage](#Usage)
-  
 ## Live demo
 
-[You can find the demo here](https://kylebot0.github.io/web-app-from-scratch-1920/docs/index.html)
+## To Do 📌
+This is a list of things I want to do in this project:
+
+- [ ] .
 
 ## Description 📝
+*Here goes the description of a project.*
 
-## SpaceX API
-The data used throughout the application is from the SpaceX API ```https://api.spacexdata.com/v3```.
-It is a free public api with no rate limit, and can be called as many times as you want.
+## Installing 🔍
+To install this application enter the following into your terminal:
+```
+git clone https://github.com/BasPieren/readme-template.git
 
-To get the data i use this piece of code, the
-```javascript
-async function getData(){
-let searchTerm = ""
-let apiLink = `https://api.spacexdata.com/v3/${searchTerm}`
-fetch(apiLink, requestOptions)
-  .then(response => response.json())
-  .then(result => console.log(result))
-  .catch(error => console.log("error", error));
-}
+cd readme-template
 ```
 
-## Flow
-### Actor diagram
+### Packages and Technologies
+This project makes use of the following packages and technologies:
 
-### Interaction diagram
+  * None!
 
-## Installation 🔍
+## API 🐒
+I made use of the following API for this project:
 
-### Before you clone
+  * None!
 
-- [x] Install a Code Editor
-- [x] Start up your CLI
+## Research 🕵🏻
+Here I explain the research for this project.
 
-### Install the app
-```
-git clone https://github.com/kylebot0/web-app-from-scratch-1920.git
-```
-Get into the right folder
-```
-cd web-app-from-scratch-1920/src
-```
-Then you can start the application
+## Concept 💡
+Here I explain the concept for this project.
 
-### Gitignore
-My .gitignore contains all of the files and maps you dont want in your application, use this if you're going to commit and push to your own repo.
-```
-# dependencies
-/node_modules
-/config
-/scripts
+## UI Design 🎨
+Here I explain the UI design process for this project.
 
-# testing
-/coverage
+## How It Works 🛠️
+Here I explain the core features of this project.
 
-# production
-/build
+## Sources 📚
+This is a list of all the sources I used during this project:
 
-# misc
-.DS_Store
-.env
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-```
+  * None!
 
-## Features 🛠️
+### Honourable Mentions
 
+  * None!
 
-### Too long to read
-- [x] Mapbox implementation
-- [x] Grid
-- [x] Heatmap
-- [x] Filtering
-- [x] Connected bar chart
-- [x] Legend
-
-
-### Known Bugs
-
-- Performance issues when clicking a lot of filters and then moving the map
-
-### Upcoming features
-
-- [ ] Switch modes
-- [ ] Switch grid sizes
-
-
-## Credits
-
-
-## License
-Find the license [here](https://github.com/kylebot0/web-app-from-scratch-1920/blob/master/LICENSE)
-
-
-
-<!-- Add a link to your live demo in Github Pages 🌐-->
-
-<!-- ☝️ replace this description with a description of your own work -->
-
-<!-- replace the code in the /docs folder with your own, so you can showcase your work with GitHub Pages 🌍 -->
-
-<!-- Add a nice poster image here at the end of the week, showing off your shiny frontend 📸 -->
-
-<!-- Maybe a table of contents here? 📚 -->
-
-<!-- How about a section that describes how to install this project? 🤓 -->
-
-<!-- ...but how does one use this project? What are its features 🤔 -->
-
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
-
-<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
-
-<!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
+## Licence 🔓
+MIT © [Bas Pieren](https://github.com/BasPieren)
