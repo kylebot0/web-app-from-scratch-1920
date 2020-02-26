@@ -2,8 +2,8 @@
 
 This project uses the SpaceX API to display their rockets, missions, launches, capsules and ships. It has certain overview pages and detailpages. The detailpages feature all the extra content 
 
-![Project Image](https://i.imgur.com/ZALRBjH.png)
-> Image description
+![Project Image](https://github.com/kylebot0/web-app-from-scratch-1920/blob/master/gh-images/hoofdpagina.png)
+> Hoofdpagina
 
 ## Table of Contents 🗃
 * [Live demo](#live-demo)
@@ -70,4 +70,4 @@ This is a list of all the sources I used during this project:
   * None!
 
 ## Licence 🔓
-MIT © [Bas Pieren](https://github.com/BasPieren)
+MIT © [Kyle Bot](https://github.com/kylebot0)
