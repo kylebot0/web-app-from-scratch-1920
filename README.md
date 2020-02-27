@@ -108,6 +108,14 @@ SpaceX uses postman for that.
 ```
 https://docs.spacexdata.com/?version=latest
 ```
+
+## Filter, map and reduce
+Because it was part of the assignment and i didn't need to use it in my app. I decided to make a little codepen out of it using the SpaceX data.
+
+[Direct Link](https://codepen.io/Kylebot/pen/bGdWBqz)
+```
+https://codepen.io/Kylebot/pen/bGdWBqz
+```
 ## Keep up to date
 Make sure you pull the repository once in a while since we are still working on this project, you can do this by using ```git pull```
 
