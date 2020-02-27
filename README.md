@@ -6,19 +6,21 @@ This project uses the SpaceX API to display their rockets, missions, launches, c
 > Overview page
 
 ## Table of Contents 🗃
-* [Live demo](#live-demo)
-* [To Do](#to-do-)
-* [Description](#description-)
-* [Installing](#installing-)
-  * [Packages and Technologies](#packages-and-technologies)
-* [API](#api-)
-* [Research](#research-)
-* [Concept](#concept-)
-* [UI Design](#ui-design-)
-* [How It Works](#how-it-works-️)
-* [Sources](#sources-)
-  * [Honourable Mentions](#honourable-mentions)
-* [Licence](#licence-)
+- [SpaceX Display ⚙️](#spacex-display---)
+  * [Table of Contents 🗃](#table-of-contents---)
+  * [Live demo](#live-demo)
+  * [To Do and features 📌](#to-do-and-features---)
+  * [Description 📝](#description---)
+  * [Actor diagram](#actor-diagram)
+  * [Interaction diagram](#interaction-diagram)
+  * [Installing 🔍](#installing---)
+    + [Packages and Technologies](#packages-and-technologies)
+  * [API 🐒](#api---)
+  * [Keep up to date](#keep-up-to-date)
+  * [Contributing](#contributing)
+  * [Sources 📚](#sources---)
+    + [Credits](#credits)
+  * [Licence 🔓](#licence---)
 
 ## Live demo
 ```
