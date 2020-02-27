@@ -23,6 +23,7 @@ This project uses the SpaceX API to display their rockets, missions, launches, c
   * [Licence 🔓](#licence---)
 
 ## Live demo
+[Direct link](https://kylebot0.github.io/web-app-from-scratch-1920/docs)
 ```
 https://kylebot0.github.io/web-app-from-scratch-1920/docs
 ```
