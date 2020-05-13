@@ -1,6 +1,40 @@
 import { select } from "./helpers/selectors";
+import { getData, getDetailData } from "./data";
+import { render, renderDetail } from "./render";
+import toggleLoading from "./helpers/loading";
 
-export class Router {
+const api = {
+  url: `https://api.spacexdata.com/v3/`
+};
+
+const requestOptions = {
+  method: "GET",
+  redirect: "follow"
+};
+
+function addRoutesToRouter(router, data, buttons) {
+  data.forEach((category, i) => {
+    category.forEach(item => {
+      let itemKey = determineItemKey(item, i);
+      let categoryId = matchCategoryToId(category, i);
+      router.get(`${itemKey}`, categoryId, async () => {
+        toggleLoading();
+        const data = await getDetailData(categoryId, api, itemKey, categoryId);
+        renderDetail(data, categoryId);
+        toggleLoading();
+      });
+    });
+  });
+  buttons.forEach((item, i) => {
+    router.get(`${item.id}`, `${item.id}`, function(e) {
+      render(data, item.id, i);
+    });
+  });
+  router.init();
+}
+
+
+class Router {
   constructor() {
     this.routes = [];
     this.options = [];
@@ -62,3 +96,47 @@ export class Router {
   }
 }
 
+function determineItemKey(item, i){
+  let itemKey = '';
+  switch (i) {
+    case 0:
+      itemKey = item[Object.keys(item)[0]];
+      break;
+    case 1:
+      itemKey = item[Object.keys(item)[0]];
+      break;
+    case 2:
+      itemKey = item[Object.keys(item)[0]];
+      break;
+    case 3:
+      itemKey = item[Object.keys(item)[1]];
+      break;
+    case 4:
+      itemKey = item.rocket_id;
+      break;
+  }
+  return itemKey;
+}
+
+function matchCategoryToId(category, i) {
+  let title = '';
+  switch (i) {
+    case 0: 
+    title = "launches"
+      break;
+    case 1:
+      title = "ships"
+      break;
+    case 2:
+      title = "capsules"
+      break;
+    case 3:
+      title = "missions"
+      break;
+    case 4:
+      title = "rockets"
+      break;
+  }
+  return title
+}
+export {Router, addRoutesToRouter}

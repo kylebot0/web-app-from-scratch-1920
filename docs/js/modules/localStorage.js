@@ -1,3 +1,18 @@
+import { getData } from "./data";
+
+async function checkLocalStorage(buttons) {
+    const storage = createStorage();
+    const items = storage.getItem();
+    if (items == 0) {
+      console.log("1");
+      const data = await getData(buttons, api, requestOptions);
+      storage.setItem(data);
+      return data;
+    } else if (items.length > 1) {
+      return storage.getItem();
+    }
+  }
+
 const createStorage = function() {
 
     return{
@@ -22,4 +37,4 @@ const createStorage = function() {
 }
 }
 
-export { createStorage };
+export { checkLocalStorage };

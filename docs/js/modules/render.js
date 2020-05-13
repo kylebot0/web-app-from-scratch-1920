@@ -1,6 +1,20 @@
-import { select, selectAll } from "./helpers/selectors";
+import { select } from "./helpers/selectors";
 
-const categoryArray = ["launches", "ships", "capsules", "missions", "rockets"]
+function render(data, buttonId, index) {
+    data[index].forEach((item, i) => { 
+      let container = select(".container-info");
+      let markup = template(item, buttonId);
+      container.insertAdjacentHTML("beforeend", markup);
+    });
+  }
+  
+  function renderDetail(data, buttonId) {
+    let container = select(".container-info");
+    let markup = templateDetail(data, buttonId);
+    container.insertAdjacentHTML("beforeend", markup);
+  }
+
+  const categoryArray = ["launches", "ships", "capsules", "missions", "rockets"]
 
 function template(item, buttonId) {
     let markup = ``
@@ -195,5 +209,4 @@ function checkForImageShips(item) {
         return `<div><img src=${item.image} onerror="imgError(this);">`;
     }
 }
-
-export { template, templateDetail };
+  export {render, renderDetail}
